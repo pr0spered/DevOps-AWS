@@ -1,5 +1,6 @@
 # Public Subnets
-resource "aws_subnet" "ecomm-sub-1" {
+## frontend
+resource "aws_subnet" "ecomm-fe-sub-az1" {
   vpc_id                  = aws_vpc.e-comm.id
   cidr_block              = "10.0.0.0/24"
   availability_zone       = "ap-southeast-1a"
@@ -10,7 +11,7 @@ resource "aws_subnet" "ecomm-sub-1" {
   }
 }
 
-resource "aws_subnet" "ecomm-sub-2" {
+resource "aws_subnet" "ecomm-fe-sub-az2" {
   vpc_id                  = aws_vpc.e-comm.id
   cidr_block              = "10.0.16.0/24"
   availability_zone       = "ap-southeast-1b"
@@ -22,7 +23,8 @@ resource "aws_subnet" "ecomm-sub-2" {
 }
 
 # Private Subnets
-resource "aws_subnet" "ecomm-sub-3" {
+## backend
+resource "aws_subnet" "ecomm-be-sub-az1" {
   vpc_id            = aws_vpc.e-comm.id
   cidr_block        = "10.0.128.0/24"
   availability_zone = "ap-southeast-1a"
@@ -32,7 +34,7 @@ resource "aws_subnet" "ecomm-sub-3" {
   }
 }
 
-resource "aws_subnet" "ecomm-sub-4" {
+resource "aws_subnet" "ecomm-be-sub-az2" {
   vpc_id            = aws_vpc.e-comm.id
   cidr_block        = "10.0.144.0/24"
   availability_zone = "ap-southeast-1b"
@@ -42,7 +44,8 @@ resource "aws_subnet" "ecomm-sub-4" {
   }
 }
 
-resource "aws_subnet" "ecomm-sub-5" {
+## database
+resource "aws_subnet" "ecomm-db-sub-az1" {
   vpc_id            = aws_vpc.e-comm.id
   cidr_block        = "10.0.160.0/24"
   availability_zone = "ap-southeast-1a"
@@ -52,7 +55,7 @@ resource "aws_subnet" "ecomm-sub-5" {
   }
 }
 
-resource "aws_subnet" "ecomm-sub-6" {
+resource "aws_subnet" "ecomm-db-sub-az2" {
   vpc_id            = aws_vpc.e-comm.id
   cidr_block        = "10.0.176.0/24"
   availability_zone = "ap-southeast-1b"
