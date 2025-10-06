@@ -13,7 +13,7 @@ resource "aws_route_table" "ecomm-pub-rt" {
 }
 
 # Private Route Table az1
-resource "aws_route_table" "ecomm-pvt-rt" {
+resource "aws_route_table" "ecomm-pvt-rt-az1" {
   vpc_id = aws_vpc.e-comm.id
 
   route {
@@ -27,7 +27,7 @@ resource "aws_route_table" "ecomm-pvt-rt" {
 }
 
 # Private Route Table az2
-resource "aws_route_table" "ecomm-pvt-rt" {
+resource "aws_route_table" "ecomm-pvt-rt-az2" {
   vpc_id = aws_vpc.e-comm.id
 
   route {
