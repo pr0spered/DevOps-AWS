@@ -1,4 +1,4 @@
-# Security Group for Application Load Balancer
+# Security Group with inbound and outbound rules for Application Load Balancer
 resource "aws_security_group" "ecomm-sec-alb" {
   vpc_id = aws_vpc.e-comm.id
 
@@ -29,7 +29,7 @@ resource "aws_vpc_security_group_egress_rule" "ecomm-out-alb" {
   ip_protocol       = "-1"
 }
 
-# Security Group for Bastion Host
+# Security Group with inbound and outbound rules for Bastion Host
 resource "aws_security_group" "ecomm-sec-bh" {
   vpc_id = aws_vpc.e-comm.id
 
@@ -48,6 +48,68 @@ resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-bh" {
 
 resource "aws_vpc_security_group_egress_rule" "ecomm-out-bh" {
   security_group_id = aws_security_group.ecomm-sec-alb.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
+
+# Security Group with inbound and outbound rules for Backend
+resource "aws_security_group" "ecomm-sec-be" {
+  vpc_id = aws_vpc.e-comm.id
+
+  tags = {
+    Name = "ecomm-sec-grp-be"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ecomm-https-be" {
+  security_group_id = aws_security_group.ecomm-sec-be.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "tcp"
+  from_port         = 443
+  to_port           = 443
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ecomm-http-be" {
+  security_group_id = aws_security_group.ecomm-sec-be.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "tcp"
+  from_port         = 80
+  to_port           = 80
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-be" {
+  security_group_id = aws_security_group.ecomm-sec-be.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "tcp"
+  from_port         = 22
+  to_port           = 22
+}
+
+resource "aws_vpc_security_group_egress_rule" "ecomm-out-be" {
+  security_group_id = aws_security_group.ecomm-sec-be.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
+
+# Security Group with inbound and outbound rules for Database
+resource "aws_security_group" "ecomm-sec-db" {
+  vpc_id = aws_vpc.e-comm.id
+
+  tags = {
+    Name = "ecomm-sec-grp-bh"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-db" {
+  security_group_id = aws_security_group.ecomm-sec-db.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "tcp"
+  from_port         = 3306
+  to_port           = 3306
+}
+
+resource "aws_vpc_security_group_egress_rule" "ecomm-out-db" {
+  security_group_id = aws_security_group.ecomm-sec-db.id
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 }
