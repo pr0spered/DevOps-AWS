@@ -3,7 +3,7 @@ resource "aws_launch_template" "ecomm-launch-temp" {
   image_id               = data.aws_ami.amazon-linux-2023.image_id
   instance_type          = "t2.micro"
   key_name               = "sing_01"
-  vpc_security_group_ids = [aws_security_group.ecomm-sec-be.id]
+  vpc_security_group_ids = [aws_security_group.ecomm-sec-ec2.id]
 
   network_interfaces {
     security_groups             = [aws_security_group.ecomm-sec-ec2.id]
