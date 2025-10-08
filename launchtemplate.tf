@@ -6,7 +6,7 @@ resource "aws_launch_template" "ecomm-launch-temp" {
   vpc_security_group_ids = [aws_security_group.ecomm-sec-be.id]
 
   network_interfaces {
-    security_groups = [ aws_security_group.ecomm-sec-ec2.id]
+    security_groups             = [aws_security_group.ecomm-sec-ec2.id]
     associate_public_ip_address = false
   }
 
