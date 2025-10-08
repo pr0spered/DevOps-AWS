@@ -5,6 +5,11 @@ resource "aws_launch_template" "ecomm-launch-temp" {
   key_name               = "sing_01"
   vpc_security_group_ids = [aws_security_group.ecomm-sec-be.id]
 
+  network_interfaces {
+    security_groups = [ aws_security_group.ecomm-sec-ec2.id]
+    associate_public_ip_address = false
+  }
+
   tags = {
     Name = "ecomm-launch-temp"
   }
