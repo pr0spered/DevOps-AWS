@@ -96,11 +96,11 @@ resource "aws_security_group" "ecomm-sec-db" {
   vpc_id = aws_vpc.e-comm.id
 
   tags = {
-    Name = "ecomm-sec-grp-bh"
+    Name = "ecomm-sec-grp-db"
   }
 }
 
-resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-db" {
+resource "aws_vpc_security_group_ingress_rule" "ecomm-mysql-db" {
   security_group_id = aws_security_group.ecomm-sec-db.id
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "tcp"
@@ -110,6 +110,29 @@ resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-db" {
 
 resource "aws_vpc_security_group_egress_rule" "ecomm-out-db" {
   security_group_id = aws_security_group.ecomm-sec-db.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
+
+# Security Group with inbound and outbound rules for EC2 server
+resource "aws_security_group" "ecomm-sec-ec2" {
+  vpc_id = aws_vpc.e-comm.id
+
+  tags = {
+    Name = "ecomm-sec-grp-ec2"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ecomm-http-ec2" {
+  security_group_id = aws_security_group.ecomm-sec-ec2.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "HTTP"
+  from_port         = 80
+  to_port           = 80
+}
+
+resource "aws_vpc_security_group_egress_rule" "ecomm-out-ec2" {
+  security_group_id = aws_security_group.ecomm-sec-ec2.id
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 }
