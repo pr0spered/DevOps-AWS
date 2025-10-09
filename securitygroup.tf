@@ -144,3 +144,42 @@ resource "aws_vpc_security_group_egress_rule" "ecomm-out-ec2" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 }
+
+# Security Group with inbound and outbound rules for Frontend
+resource "aws_security_group" "ecomm-sec-fe" {
+  vpc_id = aws_vpc.e-comm.id
+
+  tags = {
+    Name = "ecomm-sec-grp-fe"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ecomm-https-fe" {
+  security_group_id = aws_security_group.ecomm-sec-fe.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "tcp"
+  from_port         = 443
+  to_port           = 443
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ecomm-http-fe" {
+  security_group_id = aws_security_group.ecomm-sec-fe.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "tcp"
+  from_port         = 80
+  to_port           = 80
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-fe" {
+  security_group_id = aws_security_group.ecomm-sec-fe.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "tcp"
+  from_port         = 22
+  to_port           = 22
+}
+
+resource "aws_vpc_security_group_egress_rule" "ecomm-out-fe" {
+  security_group_id = aws_security_group.ecomm-sec-fe.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
