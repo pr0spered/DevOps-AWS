@@ -12,8 +12,8 @@ resource "aws_route_table" "ecomm-pub-rt" {
   }
 }
 
-# Private Route Table az1
-resource "aws_route_table" "ecomm-pvt-rt-az1" {
+# Private Route Table for backend az1
+resource "aws_route_table" "ecomm-pvt-rt-be-az1" {
   vpc_id = aws_vpc.e-comm.id
 
   route {
@@ -26,8 +26,8 @@ resource "aws_route_table" "ecomm-pvt-rt-az1" {
   }
 }
 
-# Private Route Table az2
-resource "aws_route_table" "ecomm-pvt-rt-az2" {
+# Private Route Table for backend az2
+resource "aws_route_table" "ecomm-pvt-rt-be-az2" {
   vpc_id = aws_vpc.e-comm.id
 
   route {
@@ -37,5 +37,14 @@ resource "aws_route_table" "ecomm-pvt-rt-az2" {
 
   tags = {
     Name = "route-table-pvt-az2"
+  }
+}
+
+# Private Route Table for database
+resource "aws_route_table" "ecomm-pvt-rt-db" {
+  vpc_id = aws_vpc.e-comm.id
+
+  tags = {
+    Name = "route-table-pvt-db"
   }
 }
