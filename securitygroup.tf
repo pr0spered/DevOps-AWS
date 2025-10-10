@@ -52,44 +52,36 @@ resource "aws_vpc_security_group_egress_rule" "ecomm-out-bh" {
   ip_protocol       = "-1"
 }
 
-# # Security Group with inbound and outbound rules for Backend
-# resource "aws_security_group" "ecomm-sec-be" {
-#   vpc_id = aws_vpc.e-comm.id
+# Security Group with inbound and outbound rules for Backend
+resource "aws_security_group" "ecomm-sec-be" {
+  vpc_id = aws_vpc.e-comm.id
 
-#   tags = {
-#     Name = "ecomm-sec-grp-be"
-#   }
-# }
+  tags = {
+    Name = "ecomm-sec-grp-be"
+  }
+}
 
-# resource "aws_vpc_security_group_ingress_rule" "ecomm-https-be" {
-#   security_group_id = aws_security_group.ecomm-sec-be.id
-#   cidr_ipv4         = "0.0.0.0/0"
-#   ip_protocol       = "tcp"
-#   from_port         = 443
-#   to_port           = 443
-# }
+resource "aws_vpc_security_group_ingress_rule" "ecomm-icmp-be" {
+  security_group_id = aws_security_group.ecomm-sec-be.id
+  referenced_security_group_id = aws_security_group.ecomm-sec-fe.id
+  ip_protocol       = "icmp"
+  from_port         = -1
+  to_port           = -1
+}
 
-# resource "aws_vpc_security_group_ingress_rule" "ecomm-http-be" {
-#   security_group_id = aws_security_group.ecomm-sec-be.id
-#   cidr_ipv4         = "0.0.0.0/0"
-#   ip_protocol       = "tcp"
-#   from_port         = 80
-#   to_port           = 80
-# }
+resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-be" {
+  security_group_id = aws_security_group.ecomm-sec-be.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "tcp"
+  from_port         = 22
+  to_port           = 22
+}
 
-# resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-be" {
-#   security_group_id = aws_security_group.ecomm-sec-be.id
-#   cidr_ipv4         = "0.0.0.0/0"
-#   ip_protocol       = "tcp"
-#   from_port         = 22
-#   to_port           = 22
-# }
-
-# resource "aws_vpc_security_group_egress_rule" "ecomm-out-be" {
-#   security_group_id = aws_security_group.ecomm-sec-be.id
-#   cidr_ipv4         = "0.0.0.0/0"
-#   ip_protocol       = "-1"
-# }
+resource "aws_vpc_security_group_egress_rule" "ecomm-out-be" {
+  security_group_id = aws_security_group.ecomm-sec-be.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
 
 # Security Group with inbound and outbound rules for Database
 resource "aws_security_group" "ecomm-sec-db" {
