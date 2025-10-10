@@ -12,3 +12,9 @@ resource "aws_lb_target_group" "ecomm-tg" {
     protocol            = "HTTP"
   }
 }
+
+# Attaching Target Group to Load Balancer
+resource "aws_lb_target_group_attachment" "a1" {
+  target_group_arn = aws_lb_target_group.ecomm-tg.arn
+  target_id        = aws_lb.ecomm-alb.id
+}
