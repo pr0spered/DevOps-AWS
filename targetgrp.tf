@@ -8,7 +8,6 @@ resource "aws_lb_target_group" "ecomm-tg" {
   health_check {
     healthy_threshold   = 3
     unhealthy_threshold = 2
-    matcher             = "200,301,302"
     protocol            = "HTTP"
   }
 }
@@ -16,5 +15,5 @@ resource "aws_lb_target_group" "ecomm-tg" {
 # Attaching Target Group to Load Balancer
 resource "aws_lb_target_group_attachment" "a1" {
   target_group_arn = aws_lb_target_group.ecomm-tg.arn
-  target_id        = aws_lb.ecomm-alb.id
+  target_id        = aws_lb.ecomm-alb-fe.id
 }
