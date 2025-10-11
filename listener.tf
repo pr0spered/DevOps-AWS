@@ -1,6 +1,6 @@
 # Application Load Balancer Listener
 resource "aws_lb_listener" "ecomm-listener" {
-  load_balancer_arn = aws_lb.ecomm-alb.arn
+  load_balancer_arn = aws_lb.ecomm-alb-fe.arn
   port              = "80"
   protocol          = "HTTP"
 
