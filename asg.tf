@@ -45,3 +45,9 @@ resource "aws_autoscaling_group" "ecomm-asg-be" {
     propagate_at_launch = true
   }
 }
+
+# Attatching Auto Scaling Group to Load Balancer Target Group
+resource "aws_autoscaling_attachment" "ecomm-asg-lb-attach-be" {
+  autoscaling_group_name = aws_autoscaling_group.ecomm-asg-be.name
+  lb_target_group_arn    = aws_lb_target_group.ecomm-tg-be.arn
+}
