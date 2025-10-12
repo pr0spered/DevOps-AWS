@@ -22,7 +22,7 @@ resource "aws_autoscaling_group" "ecomm-asg-fe" {
 # Attatching Auto Scaling Group to Load Balancer Target Group
 resource "aws_autoscaling_attachment" "ecomm-asg-lb-attach" {
   autoscaling_group_name = aws_autoscaling_group.ecomm-asg-fe.name
-  lb_target_group_arn    = aws_lb_target_group.ecomm-tg.arn
+  lb_target_group_arn    = aws_lb_target_group.ecomm-tg-fe.arn
 }
 
 # Auto Scaling Group for backend
