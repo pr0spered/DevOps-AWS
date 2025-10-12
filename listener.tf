@@ -6,6 +6,6 @@ resource "aws_lb_listener" "ecomm-listener" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.ecomm-tg.arn
+    target_group_arn = aws_lb_target_group.ecomm-tg-fe.arn
   }
 }
