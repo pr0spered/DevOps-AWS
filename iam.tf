@@ -18,6 +18,8 @@ resource "aws_iam_role" "ecomm-role" {
   }
 }
 
-
-
-
+# Attatch IAM policy to the role
+resource "aws_iam_role_policy_attachment" "ecomm-role-attach" {
+  role       = aws_iam_role.ecomm-role.name
+  policy_arn = aws_iam_policy.ecomm-iam-policy.arn
+}
