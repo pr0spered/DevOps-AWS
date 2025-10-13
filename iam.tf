@@ -23,3 +23,9 @@ resource "aws_iam_role_policy_attachment" "ecomm-role-attach" {
   role       = aws_iam_role.ecomm-role.name
   policy_arn = aws_iam_policy.ecomm-iam-policy.arn
 }
+
+# AWS Instance Profile to attach IAM role to EC2 instances
+resource "aws_iam_instance_profile" "ecomm-instance-profile" {
+  name = "ecomm-instance-profile"
+  role = aws_iam_role.ecomm-role.name
+}
