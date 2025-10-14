@@ -149,7 +149,7 @@ resource "aws_security_group" "ecomm-sec-ec2" {
 resource "aws_vpc_security_group_ingress_rule" "ecomm-https-ec2" {
   security_group_id = aws_security_group.ecomm-sec-ec2.id
   cidr_ipv4         = "0.0.0.0/0"
-  ip_protocol       = "HTTPS"
+  ip_protocol       = "tcp"
   from_port         = 443
   to_port           = 443
 }
@@ -157,7 +157,7 @@ resource "aws_vpc_security_group_ingress_rule" "ecomm-https-ec2" {
 resource "aws_vpc_security_group_ingress_rule" "ecomm-http-ec2" {
   security_group_id = aws_security_group.ecomm-sec-ec2.id
   cidr_ipv4         = "0.0.0.0/0"
-  ip_protocol       = "HTTP"
+  ip_protocol       = "tcp"
   from_port         = 80
   to_port           = 80
 }
