@@ -4,6 +4,7 @@ resource "aws_launch_template" "ecomm-launch-temp-fe" {
   instance_type          = "t2.micro"
   key_name               = "sing_01"
   vpc_security_group_ids = [aws_security_group.ecomm-sec-fe.id]
+  user_data = "${file("frontend.sh")}"
 
   network_interfaces {
     security_groups             = [aws_security_group.ecomm-sec-fe.id]
