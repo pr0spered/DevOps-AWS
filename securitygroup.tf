@@ -40,7 +40,7 @@ resource "aws_security_group" "ecomm-sec-alb-be" {
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-https-alb-be" {
   security_group_id = aws_security_group.ecomm-sec-alb-be.id
-  cidr_ipv4         = "0.0.0.0/0"
+  referenced_security_group_id = aws_security_group.ecomm-sec-fe.id
   ip_protocol       = "tcp"
   from_port         = 443
   to_port           = 443
@@ -48,7 +48,7 @@ resource "aws_vpc_security_group_ingress_rule" "ecomm-https-alb-be" {
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-http-alb-be" {
   security_group_id = aws_security_group.ecomm-sec-alb-be.id
-  cidr_ipv4         = "0.0.0.0/0"
+  referenced_security_group_id = aws_security_group.ecomm-sec-fe.id
   ip_protocol       = "tcp"
   from_port         = 80
   to_port           = 80
