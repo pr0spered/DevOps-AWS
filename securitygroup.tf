@@ -125,7 +125,7 @@ resource "aws_security_group" "ecomm-sec-db" {
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-mysql-db" {
   security_group_id = aws_security_group.ecomm-sec-db.id
-  cidr_ipv4         = "0.0.0.0/0"
+  referenced_security_group_id = aws_security_group.ecomm-sec-be.id
   ip_protocol       = "tcp"
   from_port         = 3306
   to_port           = 3306
