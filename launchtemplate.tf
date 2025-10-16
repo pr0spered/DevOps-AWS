@@ -3,7 +3,6 @@ resource "aws_launch_template" "ecomm-launch-temp-fe" {
   image_id               = data.aws_ami.amazon-linux-2023.image_id
   instance_type          = "t2.micro"
   key_name               = "sing_01"
-  vpc_security_group_ids = [aws_security_group.ecomm-sec-fe.id]
   user_data = "${file("frontend.sh")}"
 
   network_interfaces {
@@ -21,7 +20,6 @@ resource "aws_launch_template" "ecomm-launch-temp-be" {
   image_id               = data.aws_ami.amazon-linux-2023.image_id
   instance_type          = "t2.micro"
   key_name               = "sing_01"
-  vpc_security_group_ids = [aws_security_group.ecomm-sec-be.id]
 
   network_interfaces {
     security_groups             = [aws_security_group.ecomm-sec-be.id]
