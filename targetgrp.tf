@@ -12,12 +12,6 @@ resource "aws_lb_target_group" "ecomm-tg-fe" {
   }
 }
 
-# Attaching Target Group to Load Balancer
-resource "aws_lb_target_group_attachment" "a1" {
-  target_group_arn = aws_lb_target_group.ecomm-tg-fe.arn
-  target_id        = aws_lb.ecomm-alb-fe.id
-}
-
 # Target Group for backend
 resource "aws_lb_target_group" "ecomm-tg-be" {
   name     = "ecomm-tg-be"
@@ -30,10 +24,4 @@ resource "aws_lb_target_group" "ecomm-tg-be" {
     unhealthy_threshold = 2
     protocol            = "HTTP"
   }
-}
-
-# Attaching Target Group to Load Balancer
-resource "aws_lb_target_group_attachment" "a2" {
-  target_group_arn = aws_lb_target_group.ecomm-tg-be.arn
-  target_id        = aws_lb.ecomm-alb-be.id
 }
