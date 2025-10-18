@@ -3,7 +3,7 @@ resource "aws_launch_template" "ecomm-launch-temp-fe" {
   image_id      = data.aws_ami.amazon-linux-2023.image_id
   instance_type = "t2.micro"
   key_name      = "sing_01"
-  user_data     = file("frontend.sh")
+  user_data     = file("bash.sh")
 
   iam_instance_profile {
     arn = aws_iam_instance_profile.ecomm-instance-profile.arn
