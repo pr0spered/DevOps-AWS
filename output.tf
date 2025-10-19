@@ -9,3 +9,8 @@ output "lb_dns" {
   value       = aws_lb.ecomm-alb-fe.dns_name
   description = "The DNS of the Load Balancer"
 }
+
+output "custom_dns" {
+  value       = aws_route53_record.ecomm-record.name
+  description = "The DNS name for the Route 53 record"
+}
