@@ -1,9 +1,3 @@
-# data to fetch Route 53 hosted zone information
-data "aws_route53_zone" "ecomm-zone" {
-  name         = "strawb3rry.club"
-  private_zone = false
-}
-
 # Create Route 53 DNS record to point to Load Balancer
 resource "aws_route53_record" "ecomm-record" {
   zone_id = data.aws_route53_zone.ecomm-zone.zone_id
