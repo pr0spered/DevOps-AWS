@@ -39,19 +39,19 @@ resource "aws_security_group" "ecomm-sec-alb-be" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-https-alb-be" {
-  security_group_id = aws_security_group.ecomm-sec-alb-be.id
+  security_group_id            = aws_security_group.ecomm-sec-alb-be.id
   referenced_security_group_id = aws_security_group.ecomm-sec-fe.id
-  ip_protocol       = "tcp"
-  from_port         = 443
-  to_port           = 443
+  ip_protocol                  = "tcp"
+  from_port                    = 443
+  to_port                      = 443
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-http-alb-be" {
-  security_group_id = aws_security_group.ecomm-sec-alb-be.id
+  security_group_id            = aws_security_group.ecomm-sec-alb-be.id
   referenced_security_group_id = aws_security_group.ecomm-sec-fe.id
-  ip_protocol       = "tcp"
-  from_port         = 80
-  to_port           = 80
+  ip_protocol                  = "tcp"
+  from_port                    = 80
+  to_port                      = 80
 }
 
 resource "aws_vpc_security_group_egress_rule" "ecomm-out-alb-be" {
@@ -71,7 +71,7 @@ resource "aws_security_group" "ecomm-sec-bh" {
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-bh" {
   security_group_id = aws_security_group.ecomm-sec-bh.id
-  cidr_ipv4         = "0.0.0.0/0"
+  cidr_ipv4         = "${chomp(data.http.my_ip.response_body)}/32"
   ip_protocol       = "tcp"
   from_port         = 22
   to_port           = 22
@@ -93,11 +93,11 @@ resource "aws_security_group" "ecomm-sec-be" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-icmp-be" {
-  security_group_id = aws_security_group.ecomm-sec-be.id
+  security_group_id            = aws_security_group.ecomm-sec-be.id
   referenced_security_group_id = aws_security_group.ecomm-sec-fe.id
-  ip_protocol       = "icmp"
-  from_port         = -1
-  to_port           = -1
+  ip_protocol                  = "icmp"
+  from_port                    = -1
+  to_port                      = -1
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-be" {
@@ -124,11 +124,11 @@ resource "aws_security_group" "ecomm-sec-db" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-mysql-db" {
-  security_group_id = aws_security_group.ecomm-sec-db.id
+  security_group_id            = aws_security_group.ecomm-sec-db.id
   referenced_security_group_id = aws_security_group.ecomm-sec-be.id
-  ip_protocol       = "tcp"
-  from_port         = 3306
-  to_port           = 3306
+  ip_protocol                  = "tcp"
+  from_port                    = 3306
+  to_port                      = 3306
 }
 
 resource "aws_vpc_security_group_egress_rule" "ecomm-out-db" {
@@ -178,19 +178,19 @@ resource "aws_security_group" "ecomm-sec-fe" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-https-fe" {
-  security_group_id = aws_security_group.ecomm-sec-fe.id
+  security_group_id            = aws_security_group.ecomm-sec-fe.id
   referenced_security_group_id = aws_security_group.ecomm-sec-alb-fe.id
-  ip_protocol       = "tcp"
-  from_port         = 443
-  to_port           = 443
+  ip_protocol                  = "tcp"
+  from_port                    = 443
+  to_port                      = 443
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-http-fe" {
-  security_group_id = aws_security_group.ecomm-sec-fe.id
+  security_group_id            = aws_security_group.ecomm-sec-fe.id
   referenced_security_group_id = aws_security_group.ecomm-sec-alb-fe.id
-  ip_protocol       = "tcp"
-  from_port         = 80
-  to_port           = 80
+  ip_protocol                  = "tcp"
+  from_port                    = 80
+  to_port                      = 80
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ecomm-ssh-fe" {
