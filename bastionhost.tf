@@ -9,6 +9,7 @@ resource "aws_instance" "ecomm-bastion" {
   iam_instance_profile        = aws_iam_instance_profile.ecomm-instance-profile.name
   user_data = base64encode(templatefile("${path.module}/scripts/bastion.sh", {
     db_endpoint = aws_db_instance.ecomm-db-inst.address,
+    s3_bucket   = aws_s3_bucket.ecomm-bucket.bucket
   }))
 
   tags = {
