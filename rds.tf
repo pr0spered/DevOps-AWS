@@ -3,7 +3,6 @@ resource "aws_db_instance" "ecomm-db-inst" {
   identifier                  = "ecomm-db"
   allocated_storage           = 20
   engine                      = "mysql"
-  engine_version              = "8.0"
   instance_class              = "db.t3.medium"
   manage_master_user_password = true
   username                    = "admin"
