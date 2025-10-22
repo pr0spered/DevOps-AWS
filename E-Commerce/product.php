@@ -10,7 +10,7 @@ include ('header.php');
     /*  include products */
 
     /*  include top sale section */
-    include ('Template/_top-sale.php');
+    include ('Template/_bestseller.php');
     /*  include top sale section */
 
 ?>

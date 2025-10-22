@@ -1,5 +1,14 @@
 <!--   product  -->
 <?php
+
+        // request method post
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        if (isset($_POST['product_submit'])){
+            // call method addToCart
+            $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
+        }
+    }
+
     $item_id = $_GET['item_id'] ?? 1;
     foreach ($product->getData() as $item) :
         if ($item['item_id'] == $item_id) :
@@ -11,16 +20,20 @@
                 <img src="<?php echo $item['item_image'] ?? "./assets/products/1.png" ?>" alt="product" class="img-fluid">
                 <div class="form-row pt-4 font-size-16 font-baloo">
                     <div class="col">
-                        <button type="submit" class="btn btn-danger form-control">Proceed to Buy</button>
+                        <a href="cart.php" class="btn btn-danger form-control">Proceed to Buy</a>
                     </div>
                     <div class="col">
+                        <form method="post">
+                        <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
+                        <input type="hidden" name="user_id" value="<?php echo 1; ?>">
                         <?php
                         if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
                             echo '<button type="submit" disabled class="btn btn-success font-size-16 form-control">In the Cart</button>';
                         }else{
-                            echo '<button type="submit" name="top_sale_submit" class="btn btn-warning font-size-16 form-control">Add to Cart</button>';
+                            echo '<button type="submit" name="product_submit" class="btn btn-warning font-size-16 form-control">Add to Cart</button>';
                         }
                         ?>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -41,9 +54,9 @@
 
                 <!---    product price       -->
                 <table class="my-3">
-                    <tr class="font-rale font-size-14">
+                    <tr class="font-rale font-size-16">
                         <td>M.R.P:</td>
-                        <td><strike>$162.00</strike></td>
+                        <td><strike>$<span><?php echo ($item['item_price'] ?? 0) + 30; ?><span></strike></td>
                     </tr>
                     <tr class="font-rale font-size-14">
                         <td>Deal Price:</td>
@@ -51,7 +64,7 @@
                     </tr>
                     <tr class="font-rale font-size-14">
                         <td>You Save:</td>
-                        <td><span class="font-size-16 text-danger">$152.00</span></td>
+                        <td><span class="font-size-16 text-danger"><?php echo round((30 / (($item['item_price'] ?? 0) + 30)) * 100, 0); ?>%</span></td>
                     </tr>
                 </table>
                 <!---    !product price       -->
@@ -69,7 +82,7 @@
                             <div class="font-size-20 my-2 color-second">
                                 <span class="fas fa-truck  border p-3 rounded-pill"></span>
                             </div>
-                            <a href="#" class="font-rale font-size-12">Daily Tuition <br>Deliverd</a>
+                            <a href="#" class="font-rale font-size-12">Same Day <br>Delivery</a>
                         </div>
                         <div class="return text-center mr-5">
                             <div class="font-size-20 my-2 color-second">
@@ -85,8 +98,8 @@
                 <!-- order-details -->
                 <div id="order-details" class="font-rale d-flex flex-column text-dark">
                     <small>Delivery by : Mar 29  - Apr 1</small>
-                    <small>Sold by <a href="#">Daily Electronics </a>(4.5 out of 5 | 18,198 ratings)</small>
-                    <small><i class="fas fa-map-marker-alt color-primary"></i>&nbsp;&nbsp;Deliver to Customer - 424201</small>
+                    <small>Sold by Daily Electronics </a>(4.5 out of 5 | 18,198 ratings)</small>
+                    <small><i class="fas fa-map-marker-alt color-primary"></i>&nbsp;&nbsp;Deliver to Customer</small>
                 </div>
                 <!-- !order-details -->
 
@@ -108,9 +121,9 @@
                         <div class="qty d-flex">
                             <h6 class="font-baloo">Qty</h6>
                             <div class="px-4 d-flex font-rale">
-                                <button class="qty-up border bg-light" data-id="pro1"><i class="fas fa-angle-up"></i></button>
-                                <input type="text" data-id="pro1" class="qty_input border px-2 w-50 bg-light" disabled value="1" placeholder="1">
-                                <button data-id="pro1" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
+                                <button class="qty-up border bg-light" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><i class="fas fa-angle-up"></i></button>
+                                <input type="text" data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty_input border px-2 w-100 bg-light" disabled value="1" placeholder="1">
+                                <button data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
                             </div>
                         </div>
                         <!-- !product qty section -->
@@ -119,16 +132,16 @@
 
                 <!-- size -->
                 <div class="size my-3">
-                    <h6 class="font-baloo">Size :</h6>
+                    <h6 class="font-baloo">Storage :</h6>
                     <div class="d-flex justify-content-between w-75">
                         <div class="font-rubik border p-2">
-                            <button class="btn p-0 font-size-14">4GB RAM</button>
+                            <button class="btn p-0 font-size-14">128GB </button>
                         </div>
                         <div class="font-rubik border p-2">
-                            <button class="btn p-0 font-size-14">6GB RAM</button>
+                            <button class="btn p-0 font-size-14">256GB </button>
                         </div>
                         <div class="font-rubik border p-2">
-                            <button class="btn p-0 font-size-14">8GB RAM</button>
+                            <button class="btn p-0 font-size-14">1TB </button>
                         </div>
                     </div>
                 </div>
@@ -140,8 +153,7 @@
             <div class="col-12">
                 <h6 class="font-rubik">Product Description</h6>
                 <hr>
-                <p class="font-rale font-size-14">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat inventore vero numquam error est ipsa, consequuntur temporibus debitis nobis sit, delectus officia ducimus dolorum sed corrupti. Sapiente optio sunt provident, accusantium eligendi eius reiciendis animi? Laboriosam, optio qui? Numquam, quo fuga. Maiores minus, accusantium velit numquam a aliquam vitae vel?</p>
-                <p class="font-rale font-size-14">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat inventore vero numquam error est ipsa, consequuntur temporibus debitis nobis sit, delectus officia ducimus dolorum sed corrupti. Sapiente optio sunt provident, accusantium eligendi eius reiciendis animi? Laboriosam, optio qui? Numquam, quo fuga. Maiores minus, accusantium velit numquam a aliquam vitae vel?</p>
+                <p class="font-rale font-size-14">Specifications & details of the product</p>
             </div>
         </div>
     </div>

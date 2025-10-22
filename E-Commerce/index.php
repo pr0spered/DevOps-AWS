@@ -10,25 +10,18 @@
         include ('Template/_banner-area.php');
     /*  include banner area  */
 
-    /*  include top sale section */
-        include ('Template/_top-sale.php');
-    /*  include top sale section */
+    /*  include bestsellers section */
+        include ('Template/_bestseller.php');
+    /*  include bestsellers section */
 
-    /*  include special price section  */
-         include ('Template/_special-price.php');
-    /*  include special price section  */
+    /*  include products section  */
+         include ('Template/_phones.php');
+    /*  include products section  */
 
     /*  include banner ads  */
         include ('Template/_banner-ads.php');
     /*  include banner ads  */
 
-    /*  include new phones section  */
-        // include ('Template/_new-phones.php');
-    /*  include new phones section  */
-
-    /*  include blog area  */
-        //  include ('Template/_blogs.php');
-    /*  include blog area  */
 
 ?>
 

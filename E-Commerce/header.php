@@ -1,9 +1,14 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Shopee</title>
+    <title>DevOps Ecommerce</title>
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
 
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -31,8 +36,24 @@
     <div class="strip d-flex justify-content-between px-4 py-1 bg-light">
         <p class="font-rale font-size-12 text-black-50 m-0">Project created by Karthik. Ecommerce platform hosted on AWS</p>
         <div class="font-rale font-size-14">
-            <a href="login.php" class="px-3 border-right border-left text-dark">Login</a>
-            <a href="register.php" class="px-3 border-right text-dark">Register</a>
+            <a href="cart.php" class="px-3 border-right border-left text-dark">
+                <?php
+                if (isset($_SESSION['username'])) {
+                    $username = $_SESSION['username'];  
+                } else {
+                    $username = "Guest";  
+                }
+                echo htmlspecialchars($username); 
+                ?>
+            </a>
+
+            <?php if (isset($_SESSION['username'])): ?>                
+                    <a href="logout.php" class="px-3 border-right text-dark">Logout</a>
+                <?php else: ?>
+                    <a href="login.php" class="px-3 border-right text-dark">Login</a>
+                    <a href="register.php" class="px-3 border-right text-dark">Register</a>
+                <?php endif; ?>
+
         </div>
     </div>
 

@@ -42,7 +42,7 @@
     </div>
 </footer>
 <div class="copyright text-center bg-dark text-white py-2">
-    <p class="font-rale font-size-14">Designed By <a href="https://www.github.com/pr0spered" class="color-second">Karthik</a></p>
+    <p class="font-rale font-size-14">Project Made By <a href="https://www.github.com/pr0spered" class="color-second">Karthik</a></p>
 </div>
 <!-- !start #footer -->
 

@@ -76,18 +76,17 @@ INSERT INTO `product` (`item_id`, `item_brand`, `item_name`, `item_price`, `item
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `register_date` datetime DEFAULT NULL
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `register_date`) VALUES
-(1, 'Daily', 'Tuition', '2020-03-28 13:07:17'),
-(2, 'Akshay', 'Kashyap', '2020-03-28 13:07:17');
+INSERT INTO `user` (`user_id`, `username`, `password`, `email`) VALUES
+(1, 'test', 'test123', 'test@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -143,7 +142,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

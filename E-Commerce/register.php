@@ -1,6 +1,8 @@
 <?php
 // Database connection
-include ('Template/DBController.php');
+include ('database/DBController.php');
+
+$db = new DBController();
 
 $message = "";
 $toastClass = "";
@@ -11,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Check if email already exists
-    $checkEmailStmt = $conn->prepare("SELECT email FROM userdata WHERE email = ?");
+    $checkEmailStmt = $db->con->prepare("SELECT email FROM user WHERE email = ?");
     $checkEmailStmt->bind_param("s", $email);
     $checkEmailStmt->execute();
     $checkEmailStmt->store_result();
@@ -21,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $toastClass = "#007bff"; // Primary color
     } else {
         // Prepare and bind
-        $stmt = $conn->prepare("INSERT INTO userdata (username, email, password) VALUES (?, ?, ?)");
+        $stmt = $db->con->prepare("INSERT INTO user (username, email, password) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $username, $email, $password);
 
         if ($stmt->execute()) {
@@ -36,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $checkEmailStmt->close();
-    $conn->close();
 }
 ?>
 
