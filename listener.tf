@@ -6,18 +6,18 @@ resource "aws_lb_listener" "ecomm-listener-fe" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.ecomm-tg-fe.arn
-  }
-}
-
-# Application Load Balancer Listener for backend
-resource "aws_lb_listener" "ecomm-listener-be" {
-  load_balancer_arn = aws_lb.ecomm-alb-be.arn
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
     target_group_arn = aws_lb_target_group.ecomm-tg-be.arn
   }
 }
+
+# # Application Load Balancer Listener for backend
+# resource "aws_lb_listener" "ecomm-listener-be" {
+#   load_balancer_arn = aws_lb.ecomm-alb-be.arn
+#   port              = "80"
+#   protocol          = "HTTP"
+
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.ecomm-tg-be.arn
+#   }
+# }

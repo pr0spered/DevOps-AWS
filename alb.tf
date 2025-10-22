@@ -11,15 +11,15 @@ resource "aws_lb" "ecomm-alb-fe" {
   }
 }
 
-# Application Load Balancer for backend
-resource "aws_lb" "ecomm-alb-be" {
-  name               = "lb-be"
-  load_balancer_type = "application"
-  internal           = true
-  security_groups    = [aws_security_group.ecomm-sec-alb-be.id]
-  subnets            = [aws_subnet.ecomm-be-sub-az1.id, aws_subnet.ecomm-be-sub-az2.id]
+# # Application Load Balancer for backend
+# resource "aws_lb" "ecomm-alb-be" {
+#   name               = "lb-be"
+#   load_balancer_type = "application"
+#   internal           = true
+#   security_groups    = [aws_security_group.ecomm-sec-alb-be.id]
+#   subnets            = [aws_subnet.ecomm-be-sub-az1.id, aws_subnet.ecomm-be-sub-az2.id]
 
-  tags = {
-    Name = "ecomm-alb-be"
-  }
-}
+#   tags = {
+#     Name = "ecomm-alb-be"
+#   }
+# }
