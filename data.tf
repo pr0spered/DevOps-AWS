@@ -12,7 +12,7 @@ data "aws_ami" "amazon-linux-2023" {
 
 # # data to fetch Route 53 hosted zone information
 # data "aws_route53_zone" "ecomm-zone" {
-#   name         = "strawb3rry.club"
+#   name         = "<hosted-zone>" # Replace with your hosted zone name
 #   private_zone = false
 # }
 

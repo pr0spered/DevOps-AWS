@@ -2,7 +2,7 @@
 # resource "aws_launch_template" "ecomm-launch-temp-fe" {
 #   image_id      = data.aws_ami.amazon-linux-2023.image_id
 #   instance_type = "t2.micro"
-#   key_name      = "sing_01"
+#   key_name      = "<key-name>" # Replace with your key pair name
 #   user_data = base64encode(templatefile("${path.module}/scripts/bash.sh", {
 #     s3_bucket = aws_s3_bucket.ecomm-bucket.id
 #   }))
@@ -25,7 +25,7 @@
 resource "aws_launch_template" "ecomm-launch-temp-be" {
   image_id      = data.aws_ami.amazon-linux-2023.image_id
   instance_type = "t2.micro"
-  key_name      = "sing_01"
+  key_name      = "<key-name>" # Replace with your key pair name
   user_data = base64encode(templatefile("${path.module}/scripts/bash.sh", {
     db_endpoint = aws_db_instance.ecomm-db-inst.address,
     s3_bucket   = aws_s3_bucket.ecomm-bucket.id
