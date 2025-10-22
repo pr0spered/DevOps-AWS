@@ -131,9 +131,17 @@ resource "aws_security_group" "ecomm-sec-db" {
   }
 }
 
-resource "aws_vpc_security_group_ingress_rule" "ecomm-mysql-db" {
+resource "aws_vpc_security_group_ingress_rule" "ecomm-mysql-db-1" {
   security_group_id            = aws_security_group.ecomm-sec-db.id
   referenced_security_group_id = aws_security_group.ecomm-sec-be.id
+  ip_protocol                  = "tcp"
+  from_port                    = 3306
+  to_port                      = 3306
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ecomm-mysql-db-2" {
+  security_group_id            = aws_security_group.ecomm-sec-db.id
+  referenced_security_group_id = aws_security_group.ecomm-sec-bh.id
   ip_protocol                  = "tcp"
   from_port                    = 3306
   to_port                      = 3306
