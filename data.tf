@@ -10,11 +10,11 @@ data "aws_ami" "amazon-linux-2023" {
 
 }
 
-# data to fetch Route 53 hosted zone information
-data "aws_route53_zone" "ecomm-zone" {
-  name         = "strawb3rry.club"
-  private_zone = false
-}
+# # data to fetch Route 53 hosted zone information
+# data "aws_route53_zone" "ecomm-zone" {
+#   name         = "strawb3rry.club"
+#   private_zone = false
+# }
 
 # data to fetch public IPv4 address of user
 data "http" "my_ip" {

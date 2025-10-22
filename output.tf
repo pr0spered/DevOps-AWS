@@ -10,11 +10,11 @@ output "lb_dns" {
   description = "The DNS of the Load Balancer"
 }
 
-# Display Route 53 record name
-output "custom_dns" {
-  value       = aws_route53_record.ecomm-record.name
-  description = "The DNS name for the Route 53 record"
-}
+# # Display Route 53 record name
+# output "custom_dns" {
+#   value       = aws_route53_record.ecomm-record.name
+#   description = "The DNS name for the Route 53 record"
+# }
 
 # Display user's ipv4 address
 output "my_ip" {
