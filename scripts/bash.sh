@@ -19,5 +19,8 @@ aws s3 sync s3://val-01 /var/www/html --delete
 # set proper permissions for Apache web root
 chmod -R 755 /var/www/html
 
+# insert database endpoint as hostname in DBController.php
+sed -i "s|<host>|${db_endpoint}|" /var/www/html/database/DBController.php
+
 # restart apache to apply changes
 systemctl restart httpd
