@@ -16,17 +16,3 @@ resource "aws_db_instance" "ecomm-db-inst" {
     Name = "ecomm-db"
   }
 }
-
-# Database Instance Replica
-resource "aws_db_instance" "ecomm-db-repl" {
-  identifier              = "ecomm-db-replica"
-  instance_class          = "db.t3.medium"
-  replicate_source_db     = aws_db_instance.ecomm-db-inst.identifier
-  availability_zone       = "ap-southeast-1b"
-  vpc_security_group_ids  = [aws_security_group.ecomm-sec-db.id]
-  backup_retention_period = 7
-
-  tags = {
-    Name = "ecom-db-replica"
-  }
-}
